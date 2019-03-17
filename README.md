@@ -1,7 +1,8 @@
 # LaraSkrill
-[![License](https://poser.pugx.org/obydul/laraskrill/license)](https://packagist.org/packages/obydul/laraskrill)
+[![Latest Stable Version](https://poser.pugx.org/obydul/laraskrill/v/stable)](https://packagist.org/packages/obydul/laraskrill)
+[![Total Downloads](https://poser.pugx.org/obydul/laraskrill/downloads)](https://packagist.org/packages/obydul/laraskrill)
 [![Latest Unstable Version](https://poser.pugx.org/obydul/laraskrill/v/unstable)](https://packagist.org/packages/obydul/laraskrill)
-
+[![License](https://poser.pugx.org/obydul/laraskrill/license)](https://packagist.org/packages/obydul/laraskrill)
 <a name="introduction"></a>
 ## Introduction
 
