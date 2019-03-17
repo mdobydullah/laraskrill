@@ -183,7 +183,7 @@ The MIT License (MIT). Please see [License File](https://github.com/mdobydullah/
 
 <a name="others"></a>
 ## Others
-`Note:` I've took the main concept from [skrill-quick](https://github.com/mikicaivosevic/skrill-quick) and thank you, [Mikica Ivosevic](https://github.com/mikicaivosevic).
+`Note:` I've taken the main concept from [skrill-quick](https://github.com/mikicaivosevic/skrill-quick) and thank you, [Mikica Ivosevic](https://github.com/mikicaivosevic).
 
 In case of any issues, kindly create one on the [Issues](https://github.com/mdobydullah/laraskrill/issues) section.
 
