@@ -76,7 +76,7 @@ class SkrillClient
         $this->request->action = 'prepare';
         $this->request->email = config('laraskrill.merchant_email');
         $this->request->password = config('laraskrill.api_password');
-        $this->request->refund_status_url = config('laraskrill.status_url');
+        $this->request->refund_status_url = config('laraskrill.refund_status_url');
 
         $ch = curl_init(self::REFUND_URL);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST'); //

@@ -10,6 +10,7 @@ return [
     'api_password' => 'API/MQI password', // required for refund option only.
     'return_url' => 'RETURN URL',
     'cancel_url' => 'CANCEL URL',
-    'status_url' => 'IPN or Email', // url or email
+    'status_url' => 'IPN URL or Email', // url or email
+    'refund_status_url' => 'IPN URL or Email', // url or email
     'logo_url' => 'WEBSITE LOGO',
 ];

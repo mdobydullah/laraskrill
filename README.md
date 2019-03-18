@@ -45,7 +45,8 @@ return [
     'api_password' => 'MD5 API/MQI password', // required for refund option only.
     'return_url' => 'RETURN URL',
     'cancel_url' => 'CANCEL URL',
-    'status_url' => 'IPN or Email', // url or email
+    'status_url' => IPN URL or Email', // url or email
+    'refund_status_url' => IPN URL or Email', // url or email
     'logo_url' => 'WEBSITE LOGO',
 ];
 ```
@@ -143,7 +144,7 @@ var_dump($do_refund); // display response
 | api_password | Your MD5 API/MQI password. | 60cede4a5aee9a3827f212ba45f88c61
 | return_url |  URL to which the customer is returned if the payment is successful. | http://example.com/payment_completed.html |
 | cancel_url |  URL to which the customer is returned if the payment is cancelled or fails. If no cancel URL is provided the Cancel button is not displayed. | http://example.com/payment_cancelled.html |
-| status_url | URL to which the transaction details are posted after the payment process is complete. Alternatively, you may specify an email address where the results are sent. If the status_url is omitted, no transaction details are sent | http://example.com/process_payment.php or mailto:info@example.com
+| status_url, refund_status_url | URL to which the transaction details are posted after the payment process is complete. Alternatively, you may specify an email address where the results are sent. If the status_url is omitted, no transaction details are sent | http://example.com/process_payment.php or mailto:info@example.com
 | logo_url |  The URL of the logo which you would like to appear in the top right of the Skrill page. The logo must be accessible via HTTPS or it will not be shown. | https://www.example.com/logo.jpg (max length: 240) |
 
 ####  Checkout Parameters
@@ -166,7 +167,7 @@ More parameters: You can add more fields. Please take a look at the page 24. [Sk
 
 `Note:` 'action', 'email', 'password', 'status_url' are already included. You can add other fields at refund without these fields.
 
-**Skrill IPN (status_url):** If you want to get from 'status_url' instead of receiving email, then you can follow this: [Skrill IPN by Denis Dima](https://gist.github.com/mdobydullah/3ed0f157175b96aa0e48771cec835a9e)
+**Skrill IPN (status_url):** If you want to get data from 'status_url' instead of receiving email, then use this code to your ipn listener: [Skrill IPN by Md. Obydullah](https://gist.github.com/mdobydullah/8b0399c5c6368c05d98239837a20fb19)
 
 <a name="information"></a>
 ## Information
