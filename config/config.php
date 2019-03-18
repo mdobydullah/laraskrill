@@ -7,7 +7,7 @@
 
 return [
     'merchant_email' => 'demoqco@sun-fish.com',
-    'api_password' => 'API/MQI password', // required for refund option only.
+    'api_password' => 'MD5 API/MQI password', // required for refund option only.
     'return_url' => 'RETURN URL',
     'cancel_url' => 'CANCEL URL',
     'status_url' => 'IPN URL or Email', // url or email
