@@ -17,7 +17,7 @@ By using this plugin you can process or refund payments from Skrill in your Lara
 composer require obydul/laraskrill
 ```
 
-* Add the service provider to your `$providers` array in `config/app.php` file like: 
+* Laravel 5.5 uses package auto-discovery, so doesn't require you to manually add the ServiceProvider. If you don't use auto-discovery, add the service provider to your `$providers` array in `config/app.php` file like: 
 
 ```php
 Obydul\LaraSkrill\LaraSkrillServiceProvider::class
@@ -46,7 +46,8 @@ return [
     'return_url' => 'RETURN URL',
     'cancel_url' => 'CANCEL URL',
     'status_url' => 'IPN URL or Email', // url or email
-    'refund_status_url' => 'IPN URL or Email', // url or email
+    'status_url2' => 'IPN URL or Email', // url or email (you can keep this blank)
+    'refund_status_url' => 'IPN URL or Email', // url or email (only for refund, you can keep this blank)
     'logo_url' => 'WEBSITE LOGO',
 ];
 ```

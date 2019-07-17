@@ -2,7 +2,6 @@
 
 namespace Obydul\LaraSkrill;
 
-
 class SkrillRequest
 {
     private $vars;

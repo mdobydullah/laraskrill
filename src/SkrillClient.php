@@ -2,7 +2,6 @@
 
 namespace Obydul\LaraSkrill;
 
-
 class SkrillClient
 {
     /** Skrill payment and refund URL */
@@ -38,6 +37,11 @@ class SkrillClient
         $this->request->cancel_url = config('laraskrill.cancel_url');
         $this->request->logo_url = config('laraskrill.logo_url');
         $this->request->status_url = config('laraskrill.status_url');
+
+        // check status_url2
+        $status_url2 = config('laraskrill.status_url2');
+        if (isset($status_url2) && $status_url2 != null)
+            $this->request->status_url2 = config('laraskrill.status_url2');
 
         $ch = curl_init(self::APP_URL);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST'); //
