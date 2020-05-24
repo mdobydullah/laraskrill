@@ -2,11 +2,13 @@
 [![Latest Stable Version](https://poser.pugx.org/obydul/laraskrill/v/stable)](https://packagist.org/packages/obydul/laraskrill)
 [![Latest Unstable Version](https://poser.pugx.org/obydul/laraskrill/v/unstable)](https://packagist.org/packages/obydul/laraskrill)
 [![License](https://poser.pugx.org/obydul/laraskrill/license)](https://packagist.org/packages/obydul/laraskrill)
-![Twitter Follow](https://img.shields.io/twitter/follow/obydulsa?label=Follow&style=social)
+![Twitter Follow](https://img.shields.io/twitter/follow/obydulme?label=Follow&style=social)
 <a name="introduction"></a>
 ## Introduction
 
-By using this plugin you can process or refund payments from Skrill in your Laravel application. You may read this article and can see the output of this package. Article link: [Laravel Skrill Payment Gateway Integration with LaraSkrill](https://www.mynotepaper.com/laravel-skrill-payment-gateway-integration-with-laraskrill.html)
+By using this plugin you can process or refund payments from Skrill in your Laravel application. You may read this article and can see the output of this package. Article link: [Laravel Skrill Payment Gateway Integration with LaraSkrill](https://www.mynotepaper.com/laravel-skrill-payment-gateway-integration-with-laraskrill)
+
+Demo Laravel Project: [Skrill integration in Laravel with LaraSkrill](https://github.com/mdobydullah/laravel-skrill-integration-with-laraskrill)
 
 <a name="installation"></a>
 ## Installation
@@ -23,41 +25,34 @@ composer require obydul/laraskrill
 Obydul\LaraSkrill\LaraSkrillServiceProvider::class
 ```
 
-* Run the following command to publish configuration:
-
-```bash
-php artisan vendor:publish
-```
-*  Then choose 'Obydul\LaraSkrill\LaraSkrillServiceProvider':
-
-![laraskrill-publish](https://user-images.githubusercontent.com/13184472/54486163-67883580-48ae-11e9-815a-b3b043b5572a.png)
-
 Installation completed.
 
 <a name="configuration"></a>
 ## Configuration
 
-* After installation, you will need to configure laraskrill. Following is the code you will find in **config/laraskrill.php**, which you should update accordingly.
+* After installation, create a constructor.
 
 ```php
-return [
-    'merchant_email' => 'demoqco@sun-fish.com',
-    'api_password' => 'MD5 API/MQI password', // required for refund option only.
-    'return_url' => 'RETURN URL',
-    'cancel_url' => 'CANCEL URL',
-    'status_url' => 'IPN URL or Email', // url or email
-    'status_url2' => 'IPN URL or Email', // url or email (you can keep this blank)
-    'refund_status_url' => 'IPN URL or Email', // url or email (only for refund, you can keep this blank)
-    'logo_url' => 'WEBSITE LOGO',
-];
+/**
+ * Construct.
+ */
+private $skrilRequest;
+
+public function __construct()
+{
+    // skrill config
+    $this->skrilRequest = new SkrillRequest();
+    $this->skrilRequest->pay_to_email = 'demoqco@sun-fish.com'; // merchant email
+    $this->skrilRequest->return_url = 'RETURN URL';
+    $this->skrilRequest->cancel_url = 'CANCEL URL';
+    $this->skrilRequest->logo_url = 'https://i.imgur.com/BYBiIZX.png';  // optional
+    $this->skrilRequest->status_url = 'IPN URL or Email';
+    $this->skrilRequest->status_url2 = 'IPN URL or Email'; // optional
+}
 ```
-* Now clear config cache: `php artisan config:cache`. You can also clear cache: `php artisan cache:clear`.
-* Still if there is a problem in your Laravel project, the config `config/laraskrill.php` may not work. At this situation you can try by entering API Credentials at `YourProject/vendor/obydul/laraskrill/config/config.php`.
 
 #### API/MQI password
-In your Skrill account, go to Settings > Developer Settings > Change MQI/API password.
-
-![API/MQI password](https://user-images.githubusercontent.com/13184472/54486371-a4096080-48b1-11e9-897f-30cb9b2bf0b0.png)
+To make a refund, we need the API/MQI password. In your Skrill account, go to Settings > Developer Settings > Change MQI/API password.
 
 <a name="usage"></a>
 ## Usage
@@ -82,21 +77,20 @@ $do_refund = $client->doRefund();
 
 #### Make a Payment
 ```php
-// Create object instance of SkrillRequest
-$request = new SkrillRequest();
-$request->transaction_id      = 'MNPSK09789'; // generate transaction id
-$request->amount              = '15.26';
-$request->currency            = 'EUR';
-$request->language            = 'EN';
-$request->prepare_only        = '1';
-$request->merchant_fields     = 'site_name, customer_email';
-$request->site_name           = 'Your Website';
-$request->customer_email      = 'customer@example.com';
-$request->detail1_description = 'Product ID:';
-$request->detail1_text        = '10001';
+// create object instance of SkrillRequest
+$this->skrilRequest->transaction_id = 'MNPTTX0001'; // generate transaction id
+$this->skrilRequest->amount = '10.26';
+$this->skrilRequest->currency = 'USD';
+$this->skrilRequest->language = 'EN';
+$this->skrilRequest->prepare_only = '1';
+$this->skrilRequest->merchant_fields = 'site_name, customer_email';
+$this->skrilRequest->site_name = 'Your Website';
+$this->skrilRequest->customer_email = 'customer@mynotepaper.com';
+$this->skrilRequest->detail1_description = 'Product ID:';
+$this->skrilRequest->detail1_text = '101';
 
-// Create object instance of SkrillClient
-$client = new SkrillClient($request);
+// create object instance of SkrillClient
+$client = new SkrillClient($this->skrilRequest);
 $sid = $client->generateSID(); //return SESSION ID
 
 // handle error
@@ -113,16 +107,21 @@ return Redirect::to($redirectUrl); // redirect user to Skrill payment page
 ```php
 // Create object instance of SkrillRequest
 $prepare_refund_request = new SkrillRequest();
-$prepare_refund_request->transaction_id    = 'MNPSK09789';
-$prepare_refund_request->amount            = '5.56';
-$prepare_refund_request->refund_note       = 'Product no longer in stock';
-$prepare_refund_request->merchant_fields   = 'site_name, customer_email';
-$prepare_refund_request->site_name         = 'Your Website';
-$prepare_refund_request->customer_email    = 'customer@example.com';
+// config
+$prepare_refund_request->email = 'merchant_email';
+$prepare_refund_request->password = 'api_password';
+$prepare_refund_request->refund_status_url = 'refund_status_url';
+// request
+$prepare_refund_request->transaction_id = 'MNPTTX0001';
+$prepare_refund_request->amount = '5.56';
+$prepare_refund_request->refund_note = 'Product no longer in stock';
+$prepare_refund_request->merchant_fields = 'site_name, customer_email';
+$prepare_refund_request->site_name = 'Your Website';
+$prepare_refund_request->customer_email = 'customer@example.com';
 
 // do prepare refund request
 $client_prepare_refund = new SkrillClient($prepare_refund_request);
-$refund_prepare_response = $client_prepare_refund->prepareRefund(); // return sid or error code
+$refund_prepare_response = $client_prepare_refund->prepareRefund(); // sid or error code
 
 // refund requests
 $refund_request = new SkrillRequest();
@@ -131,7 +130,7 @@ $refund_request->sid = $refund_prepare_response;
 // do refund
 $client_refund = new SkrillClient($refund_request);
 $do_refund = $client_refund->doRefund();
-var_dump($do_refund); // display response
+dd($do_refund); // response
 ```
 
 <a name="note"></a>

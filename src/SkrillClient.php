@@ -10,6 +10,7 @@ class SkrillClient
 
     /** @var  SkrillRequest $request */
     private $request;
+
     /** @var  string $sid */
     private $sid;
 
@@ -22,27 +23,15 @@ class SkrillClient
         if ($request != null)
             $this->request = $request;
         else
-            echo "<h2>Exception, you need to set SkrillRequest!</h2><br><br>";
+            echo "<h2>Exception, you need to set SkrillRequest!</h2><br>";
     }
 
     /**
-     * Skrill SID
-     * generate SID
+     * Generate SID
      */
     public function generateSID()
     {
-        // add required refund fields
-        $this->request->pay_to_email = config('laraskrill.merchant_email');
-        $this->request->return_url = config('laraskrill.return_url');
-        $this->request->cancel_url = config('laraskrill.cancel_url');
-        $this->request->logo_url = config('laraskrill.logo_url');
-        $this->request->status_url = config('laraskrill.status_url');
-
-        // check status_url2
-        $status_url2 = config('laraskrill.status_url2');
-        if (isset($status_url2) && $status_url2 != null)
-            $this->request->status_url2 = config('laraskrill.status_url2');
-
+        // send request to skrill
         $ch = curl_init(self::APP_URL);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST'); //
         curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0); // -0
@@ -51,13 +40,12 @@ class SkrillClient
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $response = curl_exec($ch);
+
         return $response;
     }
 
-
     /**
-     * Skrill Payment Redirect Url
-     * generate SID and generate full payment URL
+     * Generate payment URL
      */
     public function paymentRedirectUrl($sid = null)
     {
@@ -69,18 +57,13 @@ class SkrillClient
     }
 
     /**
-     * Skrill Prepare Refund
-     * prepare for full and partial refund
-     *
-     * @return resource
+     * Prepare for full and partial refund
+     * @return bool|string
      */
     public function prepareRefund()
     {
         // add required refund fields
         $this->request->action = 'prepare';
-        $this->request->email = config('laraskrill.merchant_email');
-        $this->request->password = config('laraskrill.api_password');
-        $this->request->refund_status_url = config('laraskrill.refund_status_url');
 
         $ch = curl_init(self::REFUND_URL);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST'); //
@@ -90,14 +73,13 @@ class SkrillClient
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $response = curl_exec($ch);
+
         return $response;
     }
 
     /**
-     * Skrill Refund
-     * full and partial refund
-     *
-     * @return resource
+     * Do full and partial refund
+     * @return bool|string
      */
     public function doRefund()
     {
@@ -112,6 +94,7 @@ class SkrillClient
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $response = curl_exec($ch);
+
         return $response;
     }
 
