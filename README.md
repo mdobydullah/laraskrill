@@ -6,7 +6,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-By using this plugin you can process or refund payments from Skrill in your Laravel application. You may read this article and can see the output of this package. Article link: [Laravel Skrill Payment Gateway Integration with LaraSkrill](https://www.mynotepaper.com/laravel-skrill-payment-gateway-integration-with-laraskrill)
+By using this plugin you can process or refund payments from Skrill in your Laravel application. You may read this article and can see the output of this package. Article link: [Laravel Skrill Payment Gateway Integration with LaraSkrill](https://shouts.dev/articles/laravel-skrill-payment-gateway-integration-with-laraskrill)
 
 Demo Laravel Project: [Skrill integration in Laravel with LaraSkrill](https://github.com/mdobydullah/laravel-skrill-integration-with-laraskrill)
 
