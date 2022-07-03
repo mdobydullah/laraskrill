@@ -1,26 +1,28 @@
 {
-  "name": "obydul/laraskrill",
-  "description": "LaraSkrill is a laravel plugin for processing payments through Skrill.",
-  "type": "library",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Md Obydullah",
-      "email": "hi@obydul.me"
-    }
-  ],
-  "require": {},
-  "autoload": {
-    "psr-4": {
-      "Obydul\\LaraSkrill\\": "src/"
-    }
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "Obydul\\LaraSkrill\\LaraSkrillServiceProvider"
-      ]
-    }
-  },
-  "minimum-stability": "dev"
+    "name": "obydul/laraskrill",
+    "description": "LaraSkrill is a laravel plugin for processing payments through Skrill.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Md Obydullah",
+            "email": "hi@obydul.me"
+        }
+    ],
+    "require": {
+        "laravel/framework": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Obydul\\LaraSkrill\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Obydul\\LaraSkrill\\LaraSkrillServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev"
 }
