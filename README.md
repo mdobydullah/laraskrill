@@ -89,9 +89,14 @@ $this->skrilRequest->amount = '10.26';
 $this->skrilRequest->currency = 'USD';
 $this->skrilRequest->language = 'EN';
 $this->skrilRequest->prepare_only = '1';
-$this->skrilRequest->merchant_fields = 'site_name, customer_email';
-$this->skrilRequest->site_name = 'Shouts.dev';
+
+// custom fields (optional)
+$this->skrilRequest->merchant_fields = 'site_name, invoice_id, customer_id, customer_email';
+$this->skrilRequest->site_name = 'Shout.dev';
+$this->skrilRequest->invoice_id = 'INV_' . strtoupper(str()->random(10));
+$this->skrilRequest->customer_id = 1001;
 $this->skrilRequest->customer_email = 'customer@shouts.dev';
+
 $this->skrilRequest->detail1_description = 'Product ID:';
 $this->skrilRequest->detail1_text = '101';
 
@@ -203,6 +208,6 @@ The MIT License (MIT). Please see [License File](https://github.com/mdobydullah/
 
 `Note:` I've taken the main concept from [skrill-quick](https://github.com/mikicaivosevic/skrill-quick) and thank you, [Mikica Ivosevic](https://github.com/mikicaivosevic).
 
-In case of any issues, kindly create one on the [Issues](https://github.com/mdobydullah/laraskrill/issues) section.
+In case of any issues/questions, kindly create one on the [Discussions](https://github.com/mdobydullah/laraskrill/discussions) section.
 
 Thank you for installing LaraSkrill.
