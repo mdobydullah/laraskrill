@@ -10,7 +10,7 @@
 
 By using this plugin you can process or refund payments from Skrill in your Laravel application. You may read this article and can see the output of this package. Article link: [Laravel Skrill Payment Gateway Integration with LaraSkrill](https://shouts.dev/articles/laravel-skrill-payment-gateway-integration-with-laraskrill)
 
-Demo Laravel Project: [Skrill integration in Laravel with LaraSkrill](https://github.com/mdobydullah/laravel-skrill-integration-with-laraskrill)
+Demo Laravel Project: [Laravel LaraSkrill Integration](https://github.com/mdobydullah/laravel-laraskrill-integration)
 
 <a name="installation"></a>
 
@@ -50,7 +50,7 @@ public function __construct()
     $this->skrilRequest->return_url = 'RETURN URL';
     $this->skrilRequest->cancel_url = 'CANCEL URL';
     $this->skrilRequest->logo_url = 'https://cdn.shouts.dev/images/shoutsdev.png';  // optional
-    $this->skrilRequest->status_url = 'IPN URL or Email';
+    $this->skrilRequest->status_url = 'IPN URL or Email';  // you can use https://webhook.site webhook url as test IPN
     $this->skrilRequest->status_url2 = 'IPN URL or Email'; // optional
 }
 ```
@@ -90,13 +90,13 @@ $this->skrilRequest->currency = 'USD';
 $this->skrilRequest->language = 'EN';
 $this->skrilRequest->prepare_only = '1';
 $this->skrilRequest->merchant_fields = 'site_name, customer_email';
-$this->skrilRequest->site_name = 'Your Website';
+$this->skrilRequest->site_name = 'Shouts.dev';
 $this->skrilRequest->customer_email = 'customer@shouts.dev';
 $this->skrilRequest->detail1_description = 'Product ID:';
 $this->skrilRequest->detail1_text = '101';
 
 // you can also pass your unique transaction id  (optional)
-$this->skrilRequest->transaction_id = 'SHOUTSTX0001';
+// $this->skrilRequest->transaction_id = 'SHOUTSTX0001';
 
 // create object instance of SkrillClient
 $client = new SkrillClient($this->skrilRequest);
@@ -160,9 +160,9 @@ dd($do_refund); // response
 
 #### Checkout Parameters
 
-There are many parameters of Skrill checkout. Please take a look at the page 13. [Skrill Quick Checkout Integration Guide - v7.9](https://www.skrill.com/fileadmin/content/pdf/Skrill_Quick_Checkout_Guide.pdf)
+There are many parameters of Skrill checkout. Please take a look at the page 13. [Skrill Quick Checkout Integration Guide - v8.3](https://www.skrill.com/fileadmin/content/pdf/Skrill_Quick_Checkout_Guide.pdf)
 
-`Note:` 'pay_to_email', 'return_url', 'cancel_url', 'status_url' and 'logo_url' are already included in the config file. You can add other fields at checkout without these fields.
+`Note:` 'pay_to_email', 'return_url', 'cancel_url', 'status_url', 'status_url2' and 'logo_url' are already included in the config file. You can add other fields at checkout without these fields.
 
 #### Table 2: Refund Parameters
 
@@ -185,8 +185,8 @@ More parameters: You can add more fields. Please take a look at the page 24. [Sk
 
 ## Information
 
-- [Skrill Quick Checkout Integration Guide](https://www.skrill.com/fileadmin/content/pdf/Skrill_Quick_Checkout_Guide.pdf) - version 8.1
-- [Skrill Automated Payments Interface (API) Guide](https://www.skrill.com/fileadmin/content/pdf/Skrill_Automated_Payments_Interface_Guide.pdf) - version 3.0
+- [Skrill Quick Checkout Integration Guide](https://www.skrill.com/fileadmin/content/pdf/Skrill_Quick_Checkout_Guide.pdf) - version 8.3
+- [Skrill Automated Payments Interface (API) Guide](https://www.skrill.com/fileadmin/content/pdf/Skrill_Automated_Payments_Interface_Guide.pdf) - version 3.2
 - Skrill test merchant email: demoqco@sun-fish.com, demoqcoflexible@sun-fish.com, demoqcofixedhh@sun-fish.com
 - MQI/API password and secret word: **mqi: skrill123, secretword: skrill**
 - Skrill test card numbers: VISA: **4000001234567890** | MASTERCARD: **5438311234567890**
