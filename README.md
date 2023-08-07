@@ -3,7 +3,7 @@
 [![Latest Stable Version](https://poser.pugx.org/obydul/laraskrill/v/stable)](https://packagist.org/packages/obydul/laraskrill)
 [![Latest Unstable Version](https://poser.pugx.org/obydul/laraskrill/v/unstable)](https://packagist.org/packages/obydul/laraskrill)
 [![License](https://poser.pugx.org/obydul/laraskrill/license)](https://packagist.org/packages/obydul/laraskrill)
-<a rel="nofollow" href="https://twitter.com/obyydul"><img src="https://img.shields.io/twitter/follow/obyydul?label=Follow&style=social"></a>
+<a rel="nofollow" href="https://linktr.ee/obydul"><img src="https://img.shields.io/badge/Linktree-45bc57"></a>
 <a name="introduction"></a>
 
 ## Introduction
